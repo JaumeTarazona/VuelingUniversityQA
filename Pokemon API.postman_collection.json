@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "73ddd5ec-4337-4795-a9b7-245e2b0ac828",
+		"name": "Pokemon API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27625121"
+	},
+	"item": [
+		{
+			"name": "Get pokemon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"validateOK200(pm);\r",
+							"\r",
+							"var responseData =  JSON.parse(responseBody);\r",
+							"let dataJson= responseData.forms[0].name;\r",
+							"\r",
+							"console.log(responseData);\r",
+							"\r",
+							"pm.test( dataJson===\"ditto\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLPokemon}}pokemon/ditto",
+					"host": [
+						"{{URLPokemon}}pokemon"
+					],
+					"path": [
+						"ditto"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"validateOK200 = function (pm) { pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); }); }",
+					"",
+					"",
+					"validateOK2400 = function (pm) { pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); }); }",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
