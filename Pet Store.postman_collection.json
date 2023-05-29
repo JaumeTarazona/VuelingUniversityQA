@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "da788aa7-f838-434d-92fc-884ad86d94a1",
+		"name": "Pet Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27625121"
+	},
+	"item": [
+		{
+			"name": "TC1 Create",
+			"item": [
+				{
+					"name": "Create New Pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									"    \r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 11,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"Dogs\"\r\n  },\r\n  \"name\": \"Toby\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URLPet}}pet",
+							"host": [
+								"{{URLPet}}pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get pet with id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									"var responseBody = pm.response.json();\r",
+									"pm.test(validateName(responseBody));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"validateName = function(responseBody)\r",
+									"{\r",
+									"    if(pm.expect(responseBody).to.have.property(\"name\",\"Toby\"))\r",
+									"    {\r",
+									"        Console.log(\"Your is dog is created!\");\r",
+									"    }\r",
+									"    else\r",
+									"    {\r",
+									"        Console.log(\"Your is dog is not created!\");\r",
+									"    }\r",
+									"\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URLPet}}pet/11",
+							"host": [
+								"{{URLPet}}pet"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC2 Actualitze Pet",
+			"item": [
+				{
+					"name": "Actualitze pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 11,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"Dogs\"\r\n  },\r\n  \"name\": \"Tom\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URLPet}}pet",
+							"host": [
+								"{{URLPet}}pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Pet actualitzed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									"var responseBody = pm.response.json();\r",
+									"pm.test(validateActualitzedName(responseBody));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"validateActualitzedName = function(responseBody)\r",
+									"{\r",
+									"\r",
+									"    if(pm.expect(responseBody).to.have.property(\"name\",\"Tom\"))\r",
+									"    {\r",
+									"        console.log(\"Your dog name is actualited!\");\r",
+									"    }\r",
+									"    else\r",
+									"    {\r",
+									"        console.log(\"Your is dog is not actualited!\");\r",
+									"    }\r",
+									"\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URLPet}}pet/11",
+							"host": [
+								"{{URLPet}}pet"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC3 Delete",
+			"item": [
+				{
+					"name": "Delete Pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URLPet}}pet/11",
+							"host": [
+								"{{URLPet}}pet"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Pet deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateDeleted(pm);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{URLPet}}pet/11",
+							"host": [
+								"{{URLPet}}pet"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC4 Change pet image",
+			"item": [
+				{
+					"name": "Add image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/jaumetc/Desktop/dog.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URLPet}}pet/11/uploadImage",
+							"host": [
+								"{{URLPet}}pet"
+							],
+							"path": [
+								"11",
+								"uploadImage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check image is added",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(validateOK200(pm))\r",
+									"{\r",
+									"    console.log(\"Your image is uploaded!\");\r",
+									"    \r",
+									"};"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{URLPet}}pet/11",
+							"host": [
+								"{{URLPet}}pet"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"validateOK200 = function (pm) { pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); }); }",
+					"validateDeleted = function (pm) { pm.test(\"Status code is 400, the pet is deleted\", function () { pm.response.to.have.status(404); }); }",
+					"",
+					"",
+					"",
+					"",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
